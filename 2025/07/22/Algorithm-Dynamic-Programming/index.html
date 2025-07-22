@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;ko&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[Algorithm] 동적 계획법, 과거의 나를 믿는 힘 | Danny's Blog</title><meta name="author" content="Danny Ki"><meta name="copyright" content="Danny Ki"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="🔁 동적 계획법이 뭐길래? “기억은 삶의 나침반이다.” – 윌리엄 셰익스피어        살다 보면 같은 실수를 반복하지 않기 위해지난 경험을 기억하고 참고해야 할 순간들이 있습니다.공부할 때도, 운동할 때도, 사랑할 때도…기억하고 활용하는 힘이 미래를 바꿔주죠. 프로그래밍에도 그런 철학이 담긴 알고리즘이 있습니다.바로 **동적 계획법(Dynamic Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Algorithm] 동적 계획법, 과거의 나를 믿는 힘">
+<meta property="og:url" content="https://yesmanki81.github.io/2025/07/22/Algorithm-Dynamic-Programming/index.html">
+<meta property="og:site_name" content="Danny&#39;s Blog">
+<meta property="og:description" content="🔁 동적 계획법이 뭐길래? “기억은 삶의 나침반이다.” – 윌리엄 셰익스피어        살다 보면 같은 실수를 반복하지 않기 위해지난 경험을 기억하고 참고해야 할 순간들이 있습니다.공부할 때도, 운동할 때도, 사랑할 때도…기억하고 활용하는 힘이 미래를 바꿔주죠. 프로그래밍에도 그런 철학이 담긴 알고리즘이 있습니다.바로 **동적 계획법(Dynamic Pr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yesmanki81.github.io/img/my_pic.jpeg">
+<meta property="article:published_time" content="2025-07-22T12:13:38.000Z">
+<meta property="article:modified_time" content="2025-07-22T12:24:03.789Z">
+<meta property="article:author" content="Danny Ki">
+<meta property="article:tag" content="Dynamic Programming">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yesmanki81.github.io/img/my_pic.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[Algorithm] 동적 계획법, 과거의 나를 믿는 힘",
+  "url": "https://yesmanki81.github.io/2025/07/22/Algorithm-Dynamic-Programming/",
+  "image": "https://yesmanki81.github.io/img/my_pic.jpeg",
+  "datePublished": "2025-07-22T12:13:38.000Z",
+  "dateModified": "2025-07-22T12:24:03.789Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Danny Ki",
+      "url": "https://yesmanki81.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yesmanki81.github.io/2025/07/22/Algorithm-Dynamic-Programming/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=GTM-N66KNRNW"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'GTM-N66KNRNW')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'GTM-N66KNRNW', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[Algorithm] 동적 계획법, 과거의 나를 믿는 힘',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/my_pic.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/study/"><i class="fa-fw fas fa-book"></i><span> Study</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-code"></i><span> Dev</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/dev/ai/"><i class="fa-fw fas fa-robot"></i><span> AI</span></a></li><li><a class="site-page child" href="/dev/data-engineer/"><i class="fa-fw fas fa-database"></i><span> Data Engineer</span></a></li><li><a class="site-page child" href="/dev/algorithm/"><i class="fa-fw fas fa-project-diagram"></i><span> Algorithm</span></a></li><li><a class="site-page child" href="/dev/coding-quiz/"><i class="fa-fw fas fa-question"></i><span> Coding Quiz</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/showcase/"><i class="fa-fw fas fa-star"></i><span> Showcase</span></a></div><div class="menus_item"><a class="site-page" href="/resume/"><i class="fa-fw fas fa-id-card"></i><span> Resume</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Danny's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">[Algorithm] 동적 계획법, 과거의 나를 믿는 힘</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/study/"><i class="fa-fw fas fa-book"></i><span> Study</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-code"></i><span> Dev</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/dev/ai/"><i class="fa-fw fas fa-robot"></i><span> AI</span></a></li><li><a class="site-page child" href="/dev/data-engineer/"><i class="fa-fw fas fa-database"></i><span> Data Engineer</span></a></li><li><a class="site-page child" href="/dev/algorithm/"><i class="fa-fw fas fa-project-diagram"></i><span> Algorithm</span></a></li><li><a class="site-page child" href="/dev/coding-quiz/"><i class="fa-fw fas fa-question"></i><span> Coding Quiz</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/showcase/"><i class="fa-fw fas fa-star"></i><span> Showcase</span></a></div><div class="menus_item"><a class="site-page" href="/resume/"><i class="fa-fw fas fa-id-card"></i><span> Resume</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">[Algorithm] 동적 계획법, 과거의 나를 믿는 힘</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-07-22T12:13:38.000Z" title="Created 2025-07-22 08:13:38">2025-07-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-22T12:24:03.789Z" title="Updated 2025-07-22 08:24:03">2025-07-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Dev/">Dev</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Dev/Algorithm/">Algorithm</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="🔁-동적-계획법이-뭐길래"><a href="#🔁-동적-계획법이-뭐길래" class="headerlink" title="🔁 동적 계획법이 뭐길래?"></a>🔁 동적 계획법이 뭐길래?</h2><blockquote>
+<p><strong>“기억은 삶의 나침반이다.” – 윌리엄 셰익스피어</strong></p>
+</blockquote>
+<p align="center">
+  <img src="/images/dp.png" alt="윌리엄 셰익스피어" width="60%">
+</p>
+
+<p>살다 보면 같은 실수를 반복하지 않기 위해<br>지난 경험을 기억하고 참고해야 할 순간들이 있습니다.<br>공부할 때도, 운동할 때도, 사랑할 때도…<br><strong>기억하고 활용하는 힘</strong>이 미래를 바꿔주죠.</p>
+<p>프로그래밍에도 그런 철학이 담긴 알고리즘이 있습니다.<br>바로 **동적 계획법(Dynamic Programming, DP)**입니다.</p>
+<hr>
+<h2 id="🧠-어떤-철학을-담고-있을까"><a href="#🧠-어떤-철학을-담고-있을까" class="headerlink" title="🧠 어떤 철학을 담고 있을까?"></a>🧠 어떤 철학을 담고 있을까?</h2><p>동적 계획법은 큰 문제를 해결하기 위해<br><strong>작은 문제들을 풀고</strong>, 그 결과를 <strong>기억해두는 전략</strong>입니다.</p>
+<p>한 번 풀었던 문제는 <strong>다시 계산하지 않고 저장해둔 값을 재사용</strong>하죠.<br>이렇게 하면 <strong>중복된 계산을 줄여</strong> 시간과 자원을 아낄 수 있습니다.</p>
+<blockquote>
+<p>“과거의 내가 고생해서 구해둔 답이 있다면,<br>미래의 나는 그걸 믿고 앞으로 나아가는 것.”<br>이것이 바로 동적 계획법의 철학입니다.</p>
+</blockquote>
+<hr>
+<h2 id="📚-어떻게-작동할까"><a href="#📚-어떻게-작동할까" class="headerlink" title="📚 어떻게 작동할까?"></a>📚 어떻게 작동할까?</h2><p>동적 계획법은 두 가지 방식으로 사용됩니다:</p>
+<ul>
+<li><p><strong>Top-Down (Memoization)</strong><br>큰 문제를 재귀적으로 쪼개서 풀되, <strong>이미 푼 문제는 기억</strong>해서 다시 풀지 않음.</p>
+</li>
+<li><p><strong>Bottom-Up (Tabulation)</strong><br>가장 작은 문제부터 차근차근 해결해 나가면서,<br><strong>모든 하위 문제의 해답을 표(table)에 저장</strong>하고 그것을 기반으로 최종 해답을 도출.</p>
+</li>
+</ul>
+<video width="100%" autoplay muted playsinline>
+  <source src="/videos/dp-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<hr>
+<h2 id="💡-예시로-이해하기-–-피보나치-수열"><a href="#💡-예시로-이해하기-–-피보나치-수열" class="headerlink" title="💡 예시로 이해하기 – 피보나치 수열"></a>💡 예시로 이해하기 – 피보나치 수열</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Top-Down 방식 (재귀 + 메모이제이션)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib_memo</span>(<span class="params">n, memo=&#123;&#125;</span>):</span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">in</span> memo:</span><br><span class="line">        <span class="keyword">return</span> memo[n]</span><br><span class="line">    memo[n] = fib_memo(n-<span class="number">1</span>, memo) + fib_memo(n-<span class="number">2</span>, memo)</span><br><span class="line">    <span class="keyword">return</span> memo[n]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fib_memo(<span class="number">10</span>))  <span class="comment"># 결과: 55</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Bottom-Up 방식 (반복문 + 테이블)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib_tab</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    dp = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">        dp[i] = dp[i-<span class="number">1</span>] + dp[i-<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[n]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fib_tab(<span class="number">10</span>))  <span class="comment"># 결과: 55</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎯-마무리하며"><a href="#🎯-마무리하며" class="headerlink" title="🎯 마무리하며"></a>🎯 마무리하며</h2><p>동적 계획법은 단순한 속도 개선을 넘어,<br>**”내가 이미 알고 있는 걸 믿고 다시 활용하는 법”**을 가르쳐줍니다.</p>
+<p>이 알고리즘은 말합니다:</p>
+<blockquote>
+<p>“혼자 다 하려 하지 마.<br>이미 해결한 건 기억하고, 그 힘을 믿고 앞으로 나아가.”</p>
+</blockquote>
+<p>우리 삶도 마찬가지입니다.<br>같은 시행착오를 줄이고, 과거의 배움을 미래의 선택에 활용할 줄 아는 것,<br>그게 바로 동적 계획법처럼 사는 삶이 아닐까요? 😊</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://yesmanki81.github.io">Danny Ki</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://yesmanki81.github.io/2025/07/22/Algorithm-Dynamic-Programming/">https://yesmanki81.github.io/2025/07/22/Algorithm-Dynamic-Programming/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Dynamic-Programming/">Dynamic Programming</a><a class="post-meta__tags" href="/tags/DP/">DP</a><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post-share"><div class="social-share" data-image="/img/my_pic.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/07/22/Algorithm-Selection-Sort/" title="[Algorithm] 선택 정렬, 나를 선택하는 힘"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">[Algorithm] 선택 정렬, 나를 선택하는 힘</div></div><div class="info-2"><div class="info-item-1">🔍 선택 정렬이 뭐길래? “선택은 운명을 만든다.” – 윌리엄 제닝스 브라이언        살다 보면 끊임없이 선택의 순간을 마주합니다.누구와 함께할 것인가? 무엇을 먼저 할 것인가?그리고 이런 선택들이 결국 나의 삶을 만들어 갑니다. 프로그래밍에서도 그런 선택을 반복하는 알고리즘이 있습니다.바로 **선택 정렬(Selection Sort)**이죠. 선택 정렬은 리스트에서 가장 작은 값을 찾아 선택하고,그 값을 앞쪽으로 옮기는 과정을 반복하면서 정렬을 완성합니다. 그 과정은 마치 인생의 우선순위를 정리해가는 과정처럼 보이기도 해요.“가장 먼저 해야 할 일을 찾고, 그것을 실행하는 것” —바로 선택 정렬의 철학입니다.  📚 어떻게 작동할까?선택 정렬의 작동 방식은 다음과 같아요:  리스트에서 가장 작은 값을 찾아 맨 앞 자리로 옮깁니다.   그다음엔 나머지 리스트에서 다시 가장 작은 값을 찾아두 번째 자리에 옮깁니다.   이 과정을 리스트 끝까지 반복합니다.        You...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/my_pic.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Danny Ki</div><div class="author-info-description">A data engineer's journey in coding, analytics, and building real-world systems.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yesmanki81"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/yesmanki81" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%81-%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95%EC%9D%B4-%EB%AD%90%EA%B8%B8%EB%9E%98"><span class="toc-number">1.</span> <span class="toc-text">🔁 동적 계획법이 뭐길래?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%EC%96%B4%EB%96%A4-%EC%B2%A0%ED%95%99%EC%9D%84-%EB%8B%B4%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="toc-number">2.</span> <span class="toc-text">🧠 어떤 철학을 담고 있을까?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9A-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%A0%EA%B9%8C"><span class="toc-number">3.</span> <span class="toc-text">📚 어떻게 작동할까?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%EC%98%88%EC%8B%9C%EB%A1%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-%E2%80%93-%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98-%EC%88%98%EC%97%B4"><span class="toc-number">4.</span> <span class="toc-text">💡 예시로 이해하기 – 피보나치 수열</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%EB%A7%88%EB%AC%B4%EB%A6%AC%ED%95%98%EB%A9%B0"><span class="toc-number">5.</span> <span class="toc-text">🎯 마무리하며</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Algorithm-Dynamic-Programming/" title="[Algorithm] 동적 계획법, 과거의 나를 믿는 힘">[Algorithm] 동적 계획법, 과거의 나를 믿는 힘</a><time datetime="2025-07-22T12:13:38.000Z" title="Created 2025-07-22 08:13:38">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Algorithm-Selection-Sort/" title="[Algorithm] 선택 정렬, 나를 선택하는 힘">[Algorithm] 선택 정렬, 나를 선택하는 힘</a><time datetime="2025-07-22T11:50:00.000Z" title="Created 2025-07-22 07:50:00">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Algorithm-Insert-Sort/" title="[Algorithm] 삽입정렬, 조용하지만 확실한 성장">[Algorithm] 삽입정렬, 조용하지만 확실한 성장</a><time datetime="2025-07-22T11:24:43.000Z" title="Created 2025-07-22 07:24:43">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/21/Algorithm-Bubble-Sort/" title="[Algorithm] 버블 정렬, 인생도 정렬이 될까?">[Algorithm] 버블 정렬, 인생도 정렬이 될까?</a><time datetime="2025-07-21T04:31:35.000Z" title="Created 2025-07-21 00:31:35">2025-07-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Danny Ki</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
