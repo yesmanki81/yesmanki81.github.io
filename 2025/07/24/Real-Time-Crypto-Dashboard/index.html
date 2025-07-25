@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="[&quot;en&quot;,&quot;ko&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Real-Time-Crypto-Dashboard | Danny's Blog</title><meta name="author" content="Danny Ki"><meta name="copyright" content="Danny Ki"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="This project builds a real-time cryptocurrency dashboard for Bitcoin and Ethereum using fully open-source tools on an AWS EC2 instance. The system collects live market data, streams it, stores it in a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Real-Time-Crypto-Dashboard">
+<meta property="og:url" content="https://yesmanki81.github.io/2025/07/24/Real-Time-Crypto-Dashboard/index.html">
+<meta property="og:site_name" content="Danny&#39;s Blog">
+<meta property="og:description" content="This project builds a real-time cryptocurrency dashboard for Bitcoin and Ethereum using fully open-source tools on an AWS EC2 instance. The system collects live market data, streams it, stores it in a">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yesmanki81.github.io/img/my_pic.jpeg">
+<meta property="article:published_time" content="2025-07-24T23:57:22.000Z">
+<meta property="article:modified_time" content="2025-07-25T00:03:42.451Z">
+<meta property="article:author" content="Danny Ki">
+<meta property="article:tag" content="Kafka">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Grafana">
+<meta property="article:tag" content="Cryptocurrency">
+<meta property="article:tag" content="Real-Time">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yesmanki81.github.io/img/my_pic.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Real-Time-Crypto-Dashboard",
+  "url": "https://yesmanki81.github.io/2025/07/24/Real-Time-Crypto-Dashboard/",
+  "image": "https://yesmanki81.github.io/img/my_pic.jpeg",
+  "datePublished": "2025-07-24T23:57:22.000Z",
+  "dateModified": "2025-07-25T00:03:42.451Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Danny Ki",
+      "url": "https://yesmanki81.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yesmanki81.github.io/2025/07/24/Real-Time-Crypto-Dashboard/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=GTM-N66KNRNW"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'GTM-N66KNRNW')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'GTM-N66KNRNW', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Real-Time-Crypto-Dashboard',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/my_pic.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/study/"><i class="fa-fw fas fa-book"></i><span> Study</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-code"></i><span> Dev</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/dev/ai/"><i class="fa-fw fas fa-robot"></i><span> AI</span></a></li><li><a class="site-page child" href="/dev/data-engineer/"><i class="fa-fw fas fa-database"></i><span> Data Engineer</span></a></li><li><a class="site-page child" href="/dev/algorithm/"><i class="fa-fw fas fa-project-diagram"></i><span> Algorithm</span></a></li><li><a class="site-page child" href="/dev/coding-quiz/"><i class="fa-fw fas fa-question"></i><span> Coding Quiz</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/showcase/"><i class="fa-fw fas fa-star"></i><span> Showcase</span></a></div><div class="menus_item"><a class="site-page" href="/resume/"><i class="fa-fw fas fa-id-card"></i><span> Resume</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/portfolio/project2.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Danny's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Real-Time-Crypto-Dashboard</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/study/"><i class="fa-fw fas fa-book"></i><span> Study</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-code"></i><span> Dev</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/dev/ai/"><i class="fa-fw fas fa-robot"></i><span> AI</span></a></li><li><a class="site-page child" href="/dev/data-engineer/"><i class="fa-fw fas fa-database"></i><span> Data Engineer</span></a></li><li><a class="site-page child" href="/dev/algorithm/"><i class="fa-fw fas fa-project-diagram"></i><span> Algorithm</span></a></li><li><a class="site-page child" href="/dev/coding-quiz/"><i class="fa-fw fas fa-question"></i><span> Coding Quiz</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/showcase/"><i class="fa-fw fas fa-star"></i><span> Showcase</span></a></div><div class="menus_item"><a class="site-page" href="/resume/"><i class="fa-fw fas fa-id-card"></i><span> Resume</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Real-Time-Crypto-Dashboard</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-07-24T23:57:22.000Z" title="Created 2025-07-24 19:57:22">2025-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-25T00:03:42.451Z" title="Updated 2025-07-24 20:03:42">2025-07-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Showcase/">Showcase</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>This project builds a <strong>real-time cryptocurrency dashboard</strong> for Bitcoin and Ethereum using fully open-source tools on an AWS EC2 instance. The system collects live market data, streams it, stores it in a database, applies price prediction, and visualizes everything through Grafana.</p>
+<hr>
+<h2 id="⚙️-Architecture"><a href="#⚙️-Architecture" class="headerlink" title="⚙️ Architecture"></a>⚙️ Architecture</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Python Producer] → [Kafka] → [Python Consumer] → [PostgreSQL] → [Grafana Dashboard]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🚀-Stack-Overview"><a href="#🚀-Stack-Overview" class="headerlink" title="🚀 Stack Overview"></a>🚀 Stack Overview</h2><ul>
+<li><strong>Data Source</strong>: CryptoCompare API (via <code>requests</code>)</li>
+<li><strong>Streaming</strong>: Apache Kafka</li>
+<li><strong>Storage</strong>: PostgreSQL</li>
+<li><strong>Prediction</strong>: Python (Simple Moving Average)</li>
+<li><strong>Visualization</strong>: Grafana</li>
+<li><strong>Environment</strong>: Ubuntu 22.04 on AWS EC2</li>
+</ul>
+<hr>
+<h2 id="⚡-Quick-Setup-Guide"><a href="#⚡-Quick-Setup-Guide" class="headerlink" title="⚡ Quick Setup Guide"></a>⚡ Quick Setup Guide</h2><h3 id="1️⃣-Kafka"><a href="#1️⃣-Kafka" class="headerlink" title="1️⃣ Kafka"></a>1️⃣ Kafka</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.apache.org/kafka/3.7.2/kafka_2.12-3.7.2.tgz</span><br><span class="line">tar -xzf kafka_2.12-3.7.2.tgz &amp;&amp; <span class="built_in">cd</span> kafka</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start Zookeeper and Kafka</span></span><br><span class="line"><span class="built_in">nohup</span> bin/zookeeper-server-start.sh config/zookeeper.properties &amp;</span><br><span class="line"><span class="built_in">nohup</span> bin/kafka-server-start.sh config/server.properties &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create topic</span></span><br><span class="line">bin/kafka-topics.sh --create --topic crypto_prices \</span><br><span class="line">  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2️⃣-PostgreSQL"><a href="#2️⃣-PostgreSQL" class="headerlink" title="2️⃣ PostgreSQL"></a>2️⃣ PostgreSQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE cryptodb;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> crypto <span class="keyword">WITH</span> PASSWORD <span class="string">&#x27;crypto123&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> DATABASE cryptodb <span class="keyword">TO</span> crypto;</span><br><span class="line"></span><br><span class="line">\c cryptodb</span><br><span class="line"><span class="keyword">CREATE TABLE</span> crypto_prices (</span><br><span class="line">  symbol TEXT,</span><br><span class="line">  <span class="type">timestamp</span> <span class="type">TIMESTAMP</span>,</span><br><span class="line">  price <span class="type">FLOAT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">CREATE TABLE</span> crypto_prediction (</span><br><span class="line">  symbol TEXT,</span><br><span class="line">  <span class="type">timestamp</span> <span class="type">TIMESTAMP</span>,</span><br><span class="line">  predicted_price <span class="type">FLOAT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="keyword">ALL</span> TABLES <span class="keyword">IN</span> SCHEMA public <span class="keyword">TO</span> crypto;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3️⃣-Python-Scripts"><a href="#3️⃣-Python-Scripts" class="headerlink" title="3️⃣ Python Scripts"></a>3️⃣ Python Scripts</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip install kafka-python psycopg2-binary requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start real-time pipeline</span></span><br><span class="line">python crypto_producer.py</span><br><span class="line">python crypto_consumer.py</span><br><span class="line">python price_predictor.py</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>crypto_producer.py</code>: Sends BTC&#x2F;ETH price to Kafka every 5 seconds  </li>
+<li><code>crypto_consumer.py</code>: Reads from Kafka and inserts into PostgreSQL  </li>
+<li><code>price_predictor.py</code>: Calculates 5-minute SMA and stores predictions</li>
+</ul>
+<hr>
+<h2 id="📈-Grafana-Setup"><a href="#📈-Grafana-Setup" class="headerlink" title="📈 Grafana Setup"></a>📈 Grafana Setup</h2><ul>
+<li>Install: <code>sudo apt install grafana</code></li>
+<li>Access: <code>http://&lt;EC2_IP&gt;:3000</code> (default credentials: <code>admin / admin</code>)</li>
+<li>Add <strong>PostgreSQL</strong> as data source</li>
+<li>Create dashboards:<ul>
+<li>Time series for real-time price</li>
+<li>Line chart overlay for predictions</li>
+<li>Stat panel for 24h high&#x2F;low</li>
+<li>Bar chart for 24h % change</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="✅-Sample-Queries"><a href="#✅-Sample-Queries" class="headerlink" title="✅ Sample Queries"></a>✅ Sample Queries</h2><p><strong>Real-time BTC price:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> $__time(<span class="type">timestamp</span>), price <span class="keyword">FROM</span> crypto_prices <span class="keyword">WHERE</span> symbol<span class="operator">=</span><span class="string">&#x27;BTC&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Predicted BTC price:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> $__time(<span class="type">timestamp</span>), predicted_price <span class="keyword">FROM</span> crypto_prediction <span class="keyword">WHERE</span> symbol<span class="operator">=</span><span class="string">&#x27;BTC&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🙌-Final-Result"><a href="#🙌-Final-Result" class="headerlink" title="🙌 Final Result"></a>🙌 Final Result</h2><h2 id="A-fully-integrated-production-ready-real-time-dashboard-for-tracking-and-forecasting-BTC-and-ETH-prices-—-all-powered-by-Python-Kafka-PostgreSQL-and-Grafana-on-an-EC2-instance"><a href="#A-fully-integrated-production-ready-real-time-dashboard-for-tracking-and-forecasting-BTC-and-ETH-prices-—-all-powered-by-Python-Kafka-PostgreSQL-and-Grafana-on-an-EC2-instance" class="headerlink" title="A fully integrated, production-ready real-time dashboard for tracking and forecasting BTC and ETH prices — all powered by Python, Kafka, PostgreSQL, and Grafana on an EC2 instance."></a>A fully integrated, production-ready <strong>real-time dashboard</strong> for tracking and forecasting BTC and ETH prices — all powered by Python, Kafka, PostgreSQL, and Grafana on an EC2 instance.</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://yesmanki81.github.io">Danny Ki</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://yesmanki81.github.io/2025/07/24/Real-Time-Crypto-Dashboard/">https://yesmanki81.github.io/2025/07/24/Real-Time-Crypto-Dashboard/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Kafka/">Kafka</a><a class="post-meta__tags" href="/tags/PostgreSQL/">PostgreSQL</a><a class="post-meta__tags" href="/tags/Grafana/">Grafana</a><a class="post-meta__tags" href="/tags/Cryptocurrency/">Cryptocurrency</a><a class="post-meta__tags" href="/tags/Real-Time/">Real-Time</a><a class="post-meta__tags" href="/tags/AWS/">AWS</a></div><div class="post-share"><div class="social-share" data-image="/img/my_pic.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/07/24/Used-Car-Price-Prediction-in-Virginia/" title="Used-Car-Price-Prediction-in-Virginia"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Used-Car-Price-Prediction-in-Virginia</div></div><div class="info-2"><div class="info-item-1">      🤖 Used Car Price Prediction in Virginia        A full-stack machine learning project that demonstrates the end-to-end AI workflow — from data acquisition to model deployment.     Leveraging a dataset of over 46,000 used car listings across Virginia, the project involves:            Automated data ingestion from AWS-hosted MySQL using Python and Flask       Feature engineering on structured automotive data (e.g., mileage, brand, transmission, year)       EDA and correlation-based featur...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/my_pic.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Danny Ki</div><div class="author-info-description">A data engineer's journey in coding, analytics, and building real-world systems.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yesmanki81"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/yesmanki81" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%99%EF%B8%8F-Architecture"><span class="toc-number">1.</span> <span class="toc-text">⚙️ Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-Stack-Overview"><span class="toc-number">2.</span> <span class="toc-text">🚀 Stack Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%A1-Quick-Setup-Guide"><span class="toc-number">3.</span> <span class="toc-text">⚡ Quick Setup Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-Kafka"><span class="toc-number">3.1.</span> <span class="toc-text">1️⃣ Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-PostgreSQL"><span class="toc-number">3.2.</span> <span class="toc-text">2️⃣ PostgreSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-Python-Scripts"><span class="toc-number">3.3.</span> <span class="toc-text">3️⃣ Python Scripts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%88-Grafana-Setup"><span class="toc-number">4.</span> <span class="toc-text">📈 Grafana Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-Sample-Queries"><span class="toc-number">5.</span> <span class="toc-text">✅ Sample Queries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%99%8C-Final-Result"><span class="toc-number">6.</span> <span class="toc-text">🙌 Final Result</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-fully-integrated-production-ready-real-time-dashboard-for-tracking-and-forecasting-BTC-and-ETH-prices-%E2%80%94-all-powered-by-Python-Kafka-PostgreSQL-and-Grafana-on-an-EC2-instance"><span class="toc-number">7.</span> <span class="toc-text">A fully integrated, production-ready real-time dashboard for tracking and forecasting BTC and ETH prices — all powered by Python, Kafka, PostgreSQL, and Grafana on an EC2 instance.</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/24/Real-Time-Crypto-Dashboard/" title="Real-Time-Crypto-Dashboard">Real-Time-Crypto-Dashboard</a><time datetime="2025-07-24T23:57:22.000Z" title="Created 2025-07-24 19:57:22">2025-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/24/Used-Car-Price-Prediction-in-Virginia/" title="Used-Car-Price-Prediction-in-Virginia">Used-Car-Price-Prediction-in-Virginia</a><time datetime="2025-07-24T23:31:06.000Z" title="Created 2025-07-24 19:31:06">2025-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/24/Algorithm-Quick-Sort/" title="[Algorithm] 퀵 정렬, 나누고 정복하라!">[Algorithm] 퀵 정렬, 나누고 정복하라!</a><time datetime="2025-07-24T21:34:19.000Z" title="Created 2025-07-24 17:34:19">2025-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Algorithm-Insert-Sort/" title="[Algorithm] 삽입정렬, 조용하지만 확실한 성장">[Algorithm] 삽입정렬, 조용하지만 확실한 성장</a><time datetime="2025-07-22T15:46:26.000Z" title="Created 2025-07-22 11:46:26">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Algorithm-Dynamic-Programming/" title="[Algorithm] 동적 계획법, 과거의 나를 믿는 힘">[Algorithm] 동적 계획법, 과거의 나를 믿는 힘</a><time datetime="2025-07-22T12:13:38.000Z" title="Created 2025-07-22 08:13:38">2025-07-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Danny Ki</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
